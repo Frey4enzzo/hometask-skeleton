@@ -4,5 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
+    <bean id="userDao" class="ua.epam.spring.hometask.dao.impl.UserDaoImpl" />
+    <bean id="userService" class="ua.epam.spring.hometask.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao" />
+    </bean>
 
 </beans>

@@ -17,6 +17,12 @@ public class User extends DomainObject {
 
     private NavigableSet<Ticket> tickets = new TreeSet<>();
 
+    public User(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -90,4 +96,12 @@ public class User extends DomainObject {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

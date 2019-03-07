@@ -7,5 +7,5 @@ import javax.annotation.Nullable;
 
 public interface UserDao extends AbstractDomainObjectService<User> {
 
-    public @Nullable User getUserByEmail(@Nonnull String email);
+    @Nullable User getUserByEmail(@Nonnull String email);
 }

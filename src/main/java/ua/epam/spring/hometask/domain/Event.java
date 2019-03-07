@@ -23,6 +23,13 @@ public class Event extends DomainObject {
 
     private NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
 
+    public Event() {
+    }
+
+    public Event(String name) {
+        this.name = name;
+    }
+
     /**
      * Checks if event is aired on particular <code>dateTime</code> and assigns
      * auditorium to it.
@@ -205,4 +212,12 @@ public class Event extends DomainObject {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Event{" +
+                "name='" + name + '\'' +
+                ", basePrice=" + basePrice +
+                ", rating=" + rating +
+                '}';
+    }
 }

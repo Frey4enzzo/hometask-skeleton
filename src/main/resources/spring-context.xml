@@ -9,4 +9,9 @@
         <property name="userDao" ref="userDao" />
     </bean>
 
+    <bean id="eventDao" class="ua.epam.spring.hometask.dao.impl.EventDaoImpl" />
+    <bean id="eventService" class="ua.epam.spring.hometask.service.impl.EventServiceImpl">
+        <property name="eventDao" ref="eventDao" />
+    </bean>
+
 </beans>

@@ -8,15 +8,21 @@ import java.util.Set;
 
 public class AuditoriumDaoImpl implements AuditoriumDao {
 
+    private Set<Auditorium> auditoriums;
+
+    public void setAuditoriums(Set<Auditorium> auditoriums) {
+        this.auditoriums = auditoriums;
+    }
+
     @Nonnull
     @Override
     public Set<Auditorium> getAll() {
-        return null;
+        return auditoriums;
     }
 
     @Nullable
     @Override
     public Auditorium getByName(@Nonnull String name) {
-        return null;
+        return auditoriums.stream().filter(auditorium -> auditorium.getName().equals(name)).findAny().get();
     }
 }

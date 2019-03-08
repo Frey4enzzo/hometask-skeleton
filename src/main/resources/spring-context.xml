@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
- 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+ 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="auditorium.properties"
+                                  system-properties-mode="OVERRIDE" ignore-resource-not-found="false" />
+
+    <bean id="auditorium" class="ua.epam.spring.hometask.domain.Auditorium">
+        <property name="name" value="${name}" />
+        <property name="numberOfSeats" value="${seat}" />
+        <property name="vipSeats" value="${vip}" />
+    </bean>
 
     <bean id="userDao" class="ua.epam.spring.hometask.dao.impl.UserDaoImpl" />
     <bean id="userService" class="ua.epam.spring.hometask.service.impl.UserServiceImpl">
@@ -13,5 +23,13 @@
     <bean id="eventService" class="ua.epam.spring.hometask.service.impl.EventServiceImpl">
         <property name="eventDao" ref="eventDao" />
     </bean>
+
+    <bean id="auditoriumDao" class="ua.epam.spring.hometask.dao.impl.AuditoriumDaoImpl">
+        <property name="auditoriums" ref="auditorium" />
+    </bean>
+    <bean id="auditoriumService" class="ua.epam.spring.hometask.service.impl.AuditoriumServiceImpl">
+        <property name="auditoriumDao" ref="auditoriumDao" />
+    </bean>
+
 
 </beans>

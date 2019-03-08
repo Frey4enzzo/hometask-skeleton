@@ -4,10 +4,7 @@ import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.User;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static ua.epam.spring.hometask.util.SmartUtils.isEmpty;
@@ -25,8 +22,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User save(@Nonnull User object) {
-        if (users.values().contains(object)) return object;
-        users.put(Long.valueOf(users.size()), object);
+        if (!users.values().contains(object)) users.put(Long.valueOf(users.size()), object);
         return object;
     }
 
@@ -43,6 +39,6 @@ public class UserDaoImpl implements UserDao {
     @Nonnull
     @Override
     public Collection<User> getAll() {
-        return users.values();
+        return new ArrayList<>(users.values());
     }
 }

@@ -216,8 +216,10 @@ public class Event extends DomainObject {
     public String toString() {
         return "Event{" +
                 "name='" + name + '\'' +
+                ", airDates=" + airDates +
                 ", basePrice=" + basePrice +
                 ", rating=" + rating +
+                ", auditoriums=" + auditoriums +
                 '}';
     }
 }

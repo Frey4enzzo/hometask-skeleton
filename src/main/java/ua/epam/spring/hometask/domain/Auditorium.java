@@ -1,9 +1,6 @@
 package ua.epam.spring.hometask.domain;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
@@ -19,6 +16,11 @@ public class Auditorium {
     private Set<Long> vipSeats = Collections.emptySet();
 
     public Auditorium() {
+    }
+
+    // dirty trick, think about it
+    public Auditorium(String vipSeatsNumbers) {
+        vipSeats = Arrays.stream(vipSeatsNumbers.split(",")).map(s -> Long.valueOf(s)).collect(Collectors.toSet());
     }
 
     /**
@@ -87,4 +89,12 @@ public class Auditorium {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Auditorium{" +
+                "name='" + name + '\'' +
+                ", numberOfSeats=" + numberOfSeats +
+                ", vipSeats=" + vipSeats +
+                '}';
+    }
 }

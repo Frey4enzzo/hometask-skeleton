@@ -1,6 +1,10 @@
 package ua.epam.spring.hometask.util;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class SmartUtils {
 

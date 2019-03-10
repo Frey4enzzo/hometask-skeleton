@@ -24,5 +24,11 @@
         <property name="auditoriumDao" ref="auditoriumDao" />
     </bean>
 
+    <bean id="ticketDao" class="ua.epam.spring.hometask.dao.impl.TicketDaoImpl" />
+
+    <bean id="bookingService" class="ua.epam.spring.hometask.service.impl.BookingServiceImpl">
+        <property name="userDao" ref="userDao" />
+        <property name="ticketDao" ref="ticketDao" />
+    </bean>
 
 </beans>

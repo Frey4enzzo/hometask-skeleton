@@ -7,11 +7,12 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static ua.epam.spring.hometask.util.DataGenerator.createUsers;
 import static ua.epam.spring.hometask.util.SmartUtils.isEmpty;
 
 public class UserDaoImpl implements UserDao {
 
-    private static Map<Long, User> users = new HashMap<>();
+    private static Map<Long, User> users = createUsers();
 
     @Nullable
     @Override

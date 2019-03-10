@@ -8,11 +8,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static ua.epam.spring.hometask.util.DataGenerator.createEvents;
 import static ua.epam.spring.hometask.util.SmartUtils.isEmpty;
 
 public class EventDaoImpl implements EventDao {
 
-    private static Map<Long, Event> events = new HashMap<>();
+    private static Map<Long, Event> events = createEvents();
 
     @Override
     public Event save(@Nonnull Event object) {

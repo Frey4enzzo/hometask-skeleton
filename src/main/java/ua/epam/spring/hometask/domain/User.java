@@ -1,5 +1,8 @@
 package ua.epam.spring.hometask.domain;
 
+import ua.epam.spring.hometask.validation.Email;
+
+import javax.validation.constraints.Size;
 import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.TreeSet;
@@ -13,6 +16,7 @@ public class User extends DomainObject {
 
     private String lastName;
 
+    @Email
     private String email;
 
     private NavigableSet<Ticket> tickets = new TreeSet<>();

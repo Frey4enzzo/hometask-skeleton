@@ -12,15 +12,15 @@ import java.util.Set;
 
 public class EventServiceImpl implements EventService {
 
-    EventDao eventDao;
+    private EventDao eventDao;
 
     public void setEventDao(EventDao eventDao) {
         this.eventDao = eventDao;
     }
 
     @Override
-    public Event save(@Nonnull Event object) {
-        return eventDao.save(object);
+    public void save(@Nonnull Event event) {
+        eventDao.save(event);
     }
 
     @Override

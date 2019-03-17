@@ -22,9 +22,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User save(@Nonnull User object) {
+    public void save(@Nonnull User object) {
         if (!users.values().contains(object)) users.put(Long.valueOf(users.size()), object);
-        return object;
     }
 
     @Override

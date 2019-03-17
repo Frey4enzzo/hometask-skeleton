@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class AuditoriumServiceImpl implements AuditoriumService {
 
-    AuditoriumDao auditoriumDao;
+    private AuditoriumDao auditoriumDao;
 
     public void setAuditoriumDao(AuditoriumDao auditoriumDao) {
         this.auditoriumDao = auditoriumDao;

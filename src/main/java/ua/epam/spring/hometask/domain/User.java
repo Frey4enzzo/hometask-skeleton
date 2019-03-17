@@ -1,8 +1,7 @@
 package ua.epam.spring.hometask.domain;
 
-import ua.epam.spring.hometask.validation.Email;
+import ua.epam.spring.hometask.validation.annotations.Email;
 
-import javax.validation.constraints.Size;
 import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.TreeSet;

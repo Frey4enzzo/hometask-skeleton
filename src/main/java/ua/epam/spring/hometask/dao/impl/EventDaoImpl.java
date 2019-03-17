@@ -17,9 +17,8 @@ public class EventDaoImpl implements EventDao {
     private static Map<Long, Event> events = createEvents();
 
     @Override
-    public Event save(@Nonnull Event object) {
+    public void save(@Nonnull Event object) {
         if (!events.values().contains(object)) events.put(Long.valueOf(events.size()), object);
-        return object;
     }
 
     @Override

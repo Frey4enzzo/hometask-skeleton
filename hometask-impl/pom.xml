@@ -13,7 +13,13 @@
 
     <!-- for javax @Nullable annotation-->
     <artifactId>hometask-impl</artifactId>
+
     <dependencies>
+        <dependency>
+            <groupId>com.epam.spring.edu</groupId>
+            <artifactId>hometask-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>

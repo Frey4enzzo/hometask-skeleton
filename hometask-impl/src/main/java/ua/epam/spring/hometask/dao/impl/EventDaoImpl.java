@@ -1,5 +1,6 @@
 package ua.epam.spring.hometask.dao.impl;
 
+import org.springframework.stereotype.Repository;
 import ua.epam.spring.hometask.dao.EventDao;
 import ua.epam.spring.hometask.domain.Event;
 import javax.annotation.Nonnull;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 import static ua.epam.spring.hometask.util.DataGenerator.createEvents;
 import static ua.epam.spring.hometask.util.SmartUtils.isEmpty;
 
+@Repository
 public class EventDaoImpl implements EventDao {
 
     private static Map<Long, Event> events = createEvents();

@@ -1,5 +1,6 @@
 package ua.epam.spring.hometask.dao.impl;
 
+import org.springframework.stereotype.Repository;
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.User;
 import javax.annotation.Nonnull;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 import static ua.epam.spring.hometask.util.DataGenerator.createUsers;
 import static ua.epam.spring.hometask.util.SmartUtils.isEmpty;
 
+@Repository
 public class UserDaoImpl implements UserDao {
 
     private static Map<Long, User> users = createUsers();

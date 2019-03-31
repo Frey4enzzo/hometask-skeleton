@@ -1,5 +1,7 @@
 package ua.epam.spring.hometask.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.epam.spring.hometask.dao.TicketDao;
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.Event;
@@ -14,9 +16,12 @@ import java.util.stream.Collectors;
 
 import static ua.epam.spring.hometask.util.SmartUtils.isEmpty;
 
+@Service
 public class BookingServiceImpl implements BookingService {
 
+    @Autowired
     private UserDao userDao;
+    @Autowired
     private TicketDao ticketDao;
 
     public void setUserDao(UserDao userDao) {

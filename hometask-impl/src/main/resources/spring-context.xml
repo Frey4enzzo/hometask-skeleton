@@ -7,29 +7,4 @@
     <import resource="auditoriums.xml" />
     <import resource="validators.xml" />
 
-    <bean id="userDao" class="ua.epam.spring.hometask.dao.impl.UserDaoImpl" />
-    <bean id="userService" class="ua.epam.spring.hometask.service.impl.UserServiceImpl">
-        <property name="userDao" ref="userDao" />
-        <property name="domainValidator" ref="userValidator" />
-    </bean>
-
-    <bean id="eventDao" class="ua.epam.spring.hometask.dao.impl.EventDaoImpl" />
-    <bean id="eventService" class="ua.epam.spring.hometask.service.impl.EventServiceImpl">
-        <property name="eventDao" ref="eventDao" />
-    </bean>
-
-    <bean id="auditoriumDao" class="ua.epam.spring.hometask.dao.impl.AuditoriumDaoImpl">
-        <property name="auditoriums" ref="auditoriumMap" />
-    </bean>
-    <bean id="auditoriumService" class="ua.epam.spring.hometask.service.impl.AuditoriumServiceImpl">
-        <property name="auditoriumDao" ref="auditoriumDao" />
-    </bean>
-
-    <bean id="ticketDao" class="ua.epam.spring.hometask.dao.impl.TicketDaoImpl" />
-
-    <bean id="bookingService" class="ua.epam.spring.hometask.service.impl.BookingServiceImpl">
-        <property name="userDao" ref="userDao" />
-        <property name="ticketDao" ref="ticketDao" />
-    </bean>
-
 </beans>

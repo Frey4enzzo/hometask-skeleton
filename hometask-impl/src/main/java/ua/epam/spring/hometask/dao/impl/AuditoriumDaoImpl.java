@@ -1,5 +1,6 @@
 package ua.epam.spring.hometask.dao.impl;
 
+import org.springframework.stereotype.Repository;
 import ua.epam.spring.hometask.dao.AuditoriumDao;
 import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.AuditoriumType;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+@Repository
 public class AuditoriumDaoImpl implements AuditoriumDao {
 
     private Map<AuditoriumType, Auditorium> auditoriums;

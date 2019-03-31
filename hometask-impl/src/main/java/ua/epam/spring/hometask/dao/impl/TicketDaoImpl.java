@@ -1,5 +1,6 @@
 package ua.epam.spring.hometask.dao.impl;
 
+import org.springframework.stereotype.Repository;
 import ua.epam.spring.hometask.dao.TicketDao;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
@@ -10,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Repository
 public class TicketDaoImpl implements TicketDao {
 
     private static Map<Long, Ticket> onSaleTickets = new HashMap<>();

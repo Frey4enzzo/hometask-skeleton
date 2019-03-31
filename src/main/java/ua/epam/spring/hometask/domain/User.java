@@ -1,5 +1,7 @@
 package ua.epam.spring.hometask.domain;
 
+import ua.epam.spring.hometask.validation.annotations.Email;
+
 import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.TreeSet;
@@ -13,9 +15,16 @@ public class User extends DomainObject {
 
     private String lastName;
 
+    @Email
     private String email;
 
     private NavigableSet<Ticket> tickets = new TreeSet<>();
+
+    public User(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -90,4 +99,12 @@ public class User extends DomainObject {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

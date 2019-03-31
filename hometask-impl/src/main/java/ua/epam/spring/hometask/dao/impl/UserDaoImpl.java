@@ -5,7 +5,10 @@ import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.User;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Map;
+import java.util.List;
+import java.util.Collection;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import static ua.epam.spring.hometask.util.DataGenerator.createUsers;

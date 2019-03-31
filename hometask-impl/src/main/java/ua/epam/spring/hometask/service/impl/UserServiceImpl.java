@@ -5,9 +5,6 @@ import org.springframework.stereotype.Service;
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.UserService;
-import ua.epam.spring.hometask.validation.validators.DomainValidator;
-import ua.epam.spring.hometask.validation.validators.UserValidator;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
@@ -18,14 +15,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
-    DomainValidator<User> domainValidator = new UserValidator();
-
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
-    }
-
-    public void setDomainValidator(DomainValidator<User> domainValidator) {
-        this.domainValidator = domainValidator;
     }
 
     @Nullable
@@ -36,9 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(@Nonnull User user) {
-        domainValidator.validate(user);
-        if (domainValidator.getValidationResult().size() == 0) userDao.save(user);
-        else domainValidator.logResult();
+        userDao.save(user);
     }
 
     @Override

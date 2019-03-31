@@ -1,10 +1,12 @@
 package ua.epam.spring.hometask.validation.validators;
 
+import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.domain.User;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.Set;
 
+@Component
 public class UserValidator implements DomainValidator<User> {
 
     private Validator validator;

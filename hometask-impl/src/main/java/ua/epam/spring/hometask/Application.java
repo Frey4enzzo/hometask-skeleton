@@ -6,6 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import ua.epam.spring.hometask.domain.User;
+import ua.epam.spring.hometask.service.EventService;
+import ua.epam.spring.hometask.service.UserService;
+
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -17,6 +21,9 @@ public class Application {
         ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args);
         initializeContext(ctx);
 
+        UserService service = ctx.getBean(UserService.class);
+        service.save(new User("raz", "d", "trii"));
+        System.out.println(service.getUserByEmail("trii"));
 
         ctx.close();
     }

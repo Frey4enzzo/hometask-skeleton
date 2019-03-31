@@ -5,7 +5,11 @@ import ua.epam.spring.hometask.domain.EventRating;
 import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.TreeSet;
+import java.util.Collections;
+import java.util.NavigableSet;
 
 import static ua.epam.spring.hometask.util.Constants.DateTimeConstants.*;
 
@@ -14,7 +18,7 @@ public class DataGenerator {
     public static Map<Long, User> createUsers() {
         Map<Long, User> users = new HashMap<>();
         for (int i = 0; i < 5; i++) {
-            users.put(Long.valueOf(i), new User("User FirstName " + i+1, "User LastName " + i+1, "User Email " + i+1));
+            users.put(Long.valueOf(i), new User("User FirstName " + i+1, "User LastName " + i+1, "test@mail.ru " + i+1));
         }
         return users;
     }

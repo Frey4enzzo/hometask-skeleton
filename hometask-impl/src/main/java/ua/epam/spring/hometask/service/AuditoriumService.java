@@ -7,9 +7,6 @@ import javax.annotation.Nullable;
 
 import ua.epam.spring.hometask.domain.Auditorium;
 
-/**
- * @author Yuriy_Tkach
- */
 public interface AuditoriumService {
 
     /**

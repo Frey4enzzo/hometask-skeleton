@@ -25,4 +25,10 @@ public class UserServiceController {
     public User getUser(@PathVariable("userId") Long userId) {
         return userService.getById(userId);
     }
+
+    @RequestMapping(value = "/user/add", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public void addUser(@RequestBody User user) {
+        userService.save(user);
+    }
 }

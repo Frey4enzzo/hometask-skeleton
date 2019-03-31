@@ -1,8 +1,5 @@
 package ua.epam.spring.hometask.domain;
 
-/**
- * @author Yuriy_Tkach
- */
 public class DomainObject {
 
     private Long id;

@@ -1,14 +1,10 @@
 package ua.epam.spring.hometask.service;
 
 import java.util.Collection;
-
 import javax.annotation.Nonnull;
-
 import ua.epam.spring.hometask.domain.DomainObject;
 
 /**
- * @author Yuriy_Tkach
- *
  * @param <T>
  *            DomainObject subclass
  */

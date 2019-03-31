@@ -1,14 +1,12 @@
 package ua.epam.spring.hometask.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ua.epam.spring.hometask.validation.annotations.Email;
-
 import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.TreeSet;
 
-/**
- * @author Yuriy_Tkach
- */
 public class User extends DomainObject {
 
     private String firstName;
@@ -20,7 +18,10 @@ public class User extends DomainObject {
 
     private NavigableSet<Ticket> tickets = new TreeSet<>();
 
-    public User(String firstName, String lastName, String email) {
+    @JsonCreator
+    public User(@JsonProperty(value = "firstName") String firstName,
+                @JsonProperty(value = "lastName") String lastName,
+                @JsonProperty(value = "email") String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

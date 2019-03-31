@@ -8,9 +8,18 @@
         <groupId>com.epam.spring.edu</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- for javax @Nullable annotation-->
     <artifactId>hometask-impl</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

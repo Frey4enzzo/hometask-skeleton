@@ -1,9 +1,12 @@
 package ua.epam.spring.hometask.domain;
 
+import lombok.Data;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
+@Data
 public class Auditorium {
 
     private String name;

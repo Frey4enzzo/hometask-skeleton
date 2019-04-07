@@ -1,3 +1,7 @@
 spring:
   mvc:
-    locale: en
+    locale: ru_RU
+  http:
+    encoding:
+      charset: UTF-8
+      force: true

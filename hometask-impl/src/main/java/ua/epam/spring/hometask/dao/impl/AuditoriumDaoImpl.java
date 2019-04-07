@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class AuditoriumDaoImpl implements AuditoriumDao {
@@ -19,7 +20,7 @@ public class AuditoriumDaoImpl implements AuditoriumDao {
     @Nonnull
     @Override
     public Set<Auditorium> getAll() {
-        return (Set<Auditorium>) auditoriumMap.values();
+        return auditoriumMap.values().stream().collect(Collectors.toSet());
     }
 
     @Nullable

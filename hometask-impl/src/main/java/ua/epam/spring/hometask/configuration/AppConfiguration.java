@@ -4,9 +4,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.validation.Validator;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Configuration
 @EnableWebMvc
@@ -15,12 +17,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class AppConfiguration {
 
     @Bean
-    public Validator validator() {
-        final LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-        return validator;
-    }
-
-    public Validator getValidator() {
-        return validator();
+    public ResourceBundleMessageSource defaultMessageSource() {
+        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+        source.setBasenames("messages/messages");
+        source.setDefaultEncoding("UTF-8");
+        return source;
     }
 }

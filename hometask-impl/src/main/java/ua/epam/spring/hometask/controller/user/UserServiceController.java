@@ -33,19 +33,17 @@ public class UserServiceController {
         return userService.getAll();
     }
 
-    @GetMapping(value = "/user/{userId}")
+    @GetMapping(value = "/users/{userId}")
     public User getUser(@PathVariable("userId") Long userId) {
         return userService.getById(userId);
     }
 
-    @PostMapping(value = "/user/add", produces = "text/plain;charset=UTF-8")
+    @PostMapping(value = "/users/add", produces = "text/plain;charset=UTF-8")
     public ResponseEntity<String> addUser(@RequestBody @Valid User user, Errors errors) {
         if (errors.hasErrors()) {
-            log.info("Провалена попытка создать пользователя с параметрами: {}", user);
             return controllerErrorHandler.handleControllerValidationError(errors, USER_FAILED_VALIDATION, HttpStatus.BAD_REQUEST);
         }
         userService.save(user);
-        log.info("Новый пользователь успешно создан: {}", user);
         return ResponseEntity.ok(defaultMessageSource.getMessage(USER_SUCCESS_CREATE, null, LocaleContextHolder.getLocale()));
     }
 }

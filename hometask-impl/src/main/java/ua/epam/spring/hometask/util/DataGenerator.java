@@ -16,6 +16,8 @@ public class DataGenerator {
         for (int i = 0; i < 5; i++) {
             users.put(Long.valueOf(i), new User("User FirstName " + i+1, "User LastName " + i+1, "User Email " + i+1));
         }
+        users.put(5L, new User("admin", "admin", "admin@admin.ru"));
+        users.put(6L, new User("qwerty", "qwerty", "test@password.ru"));
         return users;
     }
 

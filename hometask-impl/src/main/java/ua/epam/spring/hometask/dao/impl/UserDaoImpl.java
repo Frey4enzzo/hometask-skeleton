@@ -1,5 +1,6 @@
 package ua.epam.spring.hometask.dao.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.User;
@@ -10,11 +11,11 @@ import java.util.List;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-
 import static ua.epam.spring.hometask.util.DataGenerator.createUsers;
 import static ua.epam.spring.hometask.util.SmartUtils.isEmpty;
 
 @Repository
+@Slf4j
 public class UserDaoImpl implements UserDao {
 
     private static Map<Long, User> users = createUsers();
@@ -28,7 +29,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void save(@Nonnull User object) {
-        if (!users.values().contains(object)) users.put(Long.valueOf(users.size()), object);
+        if (!users.values().contains(object)) {
+            users.put(Long.valueOf(users.size()), object);
+            log.info("Новый пользователь успешно создан: {}", object);
+        } else {
+            log.info("Провалена попытка создать пользователя с параметрами: {}, " +
+                    "такой пользователь уже существует", object);
+        }
     }
 
     @Override

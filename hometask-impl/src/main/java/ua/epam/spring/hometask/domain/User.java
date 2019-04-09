@@ -3,6 +3,7 @@ package ua.epam.spring.hometask.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.ToString;
 import ua.epam.spring.hometask.validation.annotations.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.NavigableSet;
@@ -10,6 +11,7 @@ import java.util.Objects;
 import java.util.TreeSet;
 
 @Data
+@ToString
 public class User extends DomainObject {
 
     @NotBlank(message = "Поле firstName не может быть пустым")

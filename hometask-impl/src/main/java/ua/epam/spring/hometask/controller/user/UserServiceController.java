@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -40,10 +41,11 @@ public class UserServiceController {
     @PostMapping(value = "/user/add", produces = "text/plain;charset=UTF-8")
     public ResponseEntity<String> addUser(@RequestBody @Valid User user, Errors errors) {
         if (errors.hasErrors()) {
-            return controllerErrorHandler.handleUserValidationError(errors, USER_FAILED_VALIDATION);
+            log.info("Провалена попытка создать пользователя с параметрами: {}", user);
+            return controllerErrorHandler.handleControllerValidationError(errors, USER_FAILED_VALIDATION, HttpStatus.BAD_REQUEST);
         }
         userService.save(user);
-        log.info(defaultMessageSource.getMessage(USER_SUCCESS_CREATE, null, LocaleContextHolder.getLocale()));
+        log.info("Новый пользователь успешно создан: {}", user);
         return ResponseEntity.ok(defaultMessageSource.getMessage(USER_SUCCESS_CREATE, null, LocaleContextHolder.getLocale()));
     }
 }

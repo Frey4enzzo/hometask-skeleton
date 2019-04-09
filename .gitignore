@@ -1,4 +1,5 @@
 /target/
+hometask-impl/target/
 .classpath
 .apt_generated
 .factorypath

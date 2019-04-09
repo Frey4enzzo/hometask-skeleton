@@ -1,0 +1,37 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="insert_values" author="Alexey_Elnikov">
+
+        <insert tableName="users">
+            <column name="first_name" value="first user 1"></column>
+            <column name="last_name" value="last user 1"></column>
+            <column name="email" value="user1@email.ru"></column>
+        </insert>
+        <insert tableName="users">
+            <column name="first_name" value="first user 2"></column>
+            <column name="last_name" value="last user 2"></column>
+            <column name="email" value="user2@email.ru"></column>
+        </insert>
+        <insert tableName="users">
+            <column name="first_name" value="first user 3"></column>
+            <column name="last_name" value="last user 3"></column>
+            <column name="email" value="user3@email.ru"></column>
+        </insert>
+        <insert tableName="users">
+            <column name="first_name" value="qwerty"></column>
+            <column name="last_name" value="qwerty"></column>
+            <column name="email" value="qwerty@email.ru"></column>
+        </insert>
+        <insert tableName="users">
+            <column name="first_name" value="admin"></column>
+            <column name="last_name" value="admin"></column>
+            <column name="email" value="admin@email.ru"></column>
+        </insert>
+
+    </changeSet>
+
+
+</databaseChangeLog>

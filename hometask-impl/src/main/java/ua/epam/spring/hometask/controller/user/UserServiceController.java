@@ -18,6 +18,7 @@ import static ua.epam.spring.hometask.controller.user.UserControllerMessages.USE
 
 @RestController
 @Slf4j
+@RequestMapping(value = "/users")
 public class UserServiceController {
 
     @Autowired
@@ -27,18 +28,18 @@ public class UserServiceController {
     @Autowired
     ControllerErrorHandler controllerErrorHandler;
 
-    @GetMapping(value = "/users")
+    @GetMapping
     @ResponseBody
     public Collection<User> getAllUsers() {
         return userService.getAll();
     }
 
-    @GetMapping(value = "/users/{userId}")
+    @GetMapping(value = "/{userId}")
     public User getUser(@PathVariable("userId") Long userId) {
         return userService.getById(userId);
     }
 
-    @PostMapping(value = "/users/add", produces = "text/plain;charset=UTF-8")
+    @PostMapping(value = "/add", produces = "text/plain;charset=UTF-8")
     public ResponseEntity<String> addUser(@RequestBody @Valid User user, Errors errors) {
         if (errors.hasErrors()) {
             return controllerErrorHandler.handleControllerValidationError(errors, USER_FAILED_VALIDATION, HttpStatus.BAD_REQUEST);

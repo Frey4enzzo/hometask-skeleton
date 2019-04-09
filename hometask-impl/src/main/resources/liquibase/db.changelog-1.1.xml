@@ -31,6 +31,8 @@
             <column name="email" value="admin@email.ru"></column>
         </insert>
 
+
+
     </changeSet>
 
 

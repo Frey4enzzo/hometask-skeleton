@@ -8,7 +8,7 @@ import ua.epam.spring.hometask.domain.DomainObject;
  * @param <T>
  *            DomainObject subclass
  */
-public interface AbstractDomainObjectService<T extends DomainObject> {
+public interface AbstractDomainObjectService<T extends Object> {
 
     /**
      * Saving new object to storage or updating existing one

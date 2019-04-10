@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ua.epam.spring.hometask.validation.annotations.Email;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import java.util.NavigableSet;
 import java.util.TreeSet;
@@ -13,7 +16,11 @@ import java.util.TreeSet;
 @Data
 @NoArgsConstructor
 @Entity(name = "users")
-public class User extends DomainObject {
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_user_id")
+    private Long id;
 
     @NotBlank(message = "Поле firstName не может быть пустым")
     private String firstName;

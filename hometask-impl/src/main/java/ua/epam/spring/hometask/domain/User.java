@@ -3,18 +3,25 @@ package ua.epam.spring.hometask.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.NoArgsConstructor;
 import ua.epam.spring.hometask.validation.annotations.Email;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
 @Data
+@NoArgsConstructor
+@Entity(name = "users")
 public class User extends DomainObject {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @NotBlank(message = "Поле firstName не может быть пустым")
     private String firstName;
@@ -25,7 +32,7 @@ public class User extends DomainObject {
     @Email
     private String email;
 
-    private NavigableSet<Ticket> tickets = new TreeSet<>();
+    //private NavigableSet<Ticket> tickets = new TreeSet<>();
 
     @JsonCreator
     public User(@JsonProperty(value = "firstName") String firstName,

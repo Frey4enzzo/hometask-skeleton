@@ -1,8 +1,10 @@
 package ua.epam.spring.hometask.dao.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.epam.spring.hometask.dao.UserDao;
+import ua.epam.spring.hometask.dao.UserRepository;
 import ua.epam.spring.hometask.domain.User;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -19,6 +21,9 @@ import static ua.epam.spring.hometask.util.SmartUtils.isEmpty;
 public class UserDaoImpl implements UserDao {
 
     private static Map<Long, User> users = createUsers();
+
+    @Autowired
+    UserRepository repository;
 
     @Nullable
     @Override
@@ -45,7 +50,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getById(@Nonnull Long id) {
-        return isEmpty(users.get(id)) ? null : users.get(id);
+        return repository.findById(id).orElse(null);
     }
 
     @Nonnull

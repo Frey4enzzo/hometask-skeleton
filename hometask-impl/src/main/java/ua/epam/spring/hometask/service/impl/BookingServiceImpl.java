@@ -39,13 +39,13 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void bookTickets(@Nonnull Set<Ticket> tickets) {
-        for (Ticket ticket : tickets) {
-            if (!isEmpty(ticket.getUser())) {
-                User user = userDao.getUserByEmail(ticket.getUser().getEmail());
-                if (user != null) user.getTickets().add(ticket);
-            }
-        }
-        ticketDao.buy(tickets);
+//        for (Ticket ticket : tickets) {
+//            if (!isEmpty(ticket.getUser())) {
+//                User user = userDao.getUserByEmail(ticket.getUser().getEmail());
+//                if (user != null) user.getTickets().add(ticket);
+//            }
+//        }
+//        ticketDao.buy(tickets);
     }
 
     @Nonnull

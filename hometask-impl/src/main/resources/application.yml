@@ -7,6 +7,12 @@ spring:
       force: true
   liquibase.change-log: classpath:liquibase/db.changelog-master.xml
 
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: WARN
+    ua.epam: INFO
+
 ---
 spring:
   profiles: h2local

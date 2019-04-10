@@ -51,6 +51,16 @@
             <column name="id" type="numeric(19, 0)" defaultValueSequenceNext="seq_event_id">
                 <constraints primaryKey="true" nullable="false" />
             </column>
+            <column name="seat" type="numeric(10, 0)">
+                <constraints nullable="false" />
+            </column>
+            <column name="on_sale" type="boolean" />
+            <column name="user_id" type="numeric(19, 0)">
+                <constraints foreignKeyName="fk_user" references="users(id)" />
+            </column>
+            <column name="event_id" type="numeric(19, 0)">
+                <constraints nullable="false" foreignKeyName="fk_event" references="events(id)" />
+            </column>
         </createTable>
 
     </changeSet>

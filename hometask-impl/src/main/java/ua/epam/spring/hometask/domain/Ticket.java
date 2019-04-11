@@ -1,12 +1,16 @@
 package ua.epam.spring.hometask.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"event", "user"})
+@ToString(exclude = {"event", "user"})
 @Entity
 @Table(name = "tickets")
 public class Ticket implements Comparable<Ticket> {
@@ -15,10 +19,12 @@ public class Ticket implements Comparable<Ticket> {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_ticket_id")
     private Long id;
 
-    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id")
     private Event event;
 
     private LocalDateTime dateTime;
@@ -33,7 +39,6 @@ public class Ticket implements Comparable<Ticket> {
         this.dateTime = dateTime;
         this.seat = seat;
     }
-
 
     @Override
     public int compareTo(Ticket other) {

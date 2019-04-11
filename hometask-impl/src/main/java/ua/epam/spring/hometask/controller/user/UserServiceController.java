@@ -8,11 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import ua.epam.spring.hometask.domain.AirDate;
-import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.handler.error.ControllerErrorHandler;
-import ua.epam.spring.hometask.service.EventService;
 import ua.epam.spring.hometask.service.UserService;
 import javax.validation.Valid;
 import java.util.List;
@@ -30,8 +27,6 @@ public class UserServiceController {
     private MessageSource defaultMessageSource;
     @Autowired
     ControllerErrorHandler controllerErrorHandler;
-    @Autowired
-    EventService eventService;
 
     @GetMapping
     @ResponseBody
@@ -51,16 +46,5 @@ public class UserServiceController {
         }
         userService.save(user);
         return ResponseEntity.ok(defaultMessageSource.getMessage(USER_SUCCESS_CREATE, null, LocaleContextHolder.getLocale()));
-    }
-
-    @GetMapping(value = "/check")
-    public ResponseEntity<String> checkEvent() {
-        for (Event event : eventService.getAll()) {
-            for (AirDate airDate : event.getAirDates()) {
-                log.info("{} : {}", event.getName(), airDate.toString());
-            }
-            log.info("--------------------");
-        }
-        return ResponseEntity.ok("ok");
     }
 }

@@ -3,15 +3,19 @@ package ua.epam.spring.hometask.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ua.epam.spring.hometask.validation.annotations.Email;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.NavigableSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = "tickets")
+@ToString(exclude = "tickets")
 @Entity
 @Table(name = "users")
 public class User {
@@ -29,8 +33,8 @@ public class User {
     @Email
     private String email;
 
-    @Transient
-    private NavigableSet<Ticket> tickets = new TreeSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Ticket> tickets = new TreeSet<>();
 
     @JsonCreator
     public User(@JsonProperty(value = "firstName") String firstName,

@@ -5,7 +5,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 @Data
 @Entity
@@ -26,6 +29,9 @@ public class Event {
 
     @Enumerated(EnumType.STRING)
     private EventRating rating;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    private Set<Ticket> tickets = new TreeSet<>();
 
     @Transient
     private NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();

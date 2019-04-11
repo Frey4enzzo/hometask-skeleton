@@ -27,7 +27,7 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="basePrice" type="double(10)">
+            <column name="price" type="double(10)">
                 <constraints nullable="false" />
             </column>
             <column name="rating" type="varchar(10)" />

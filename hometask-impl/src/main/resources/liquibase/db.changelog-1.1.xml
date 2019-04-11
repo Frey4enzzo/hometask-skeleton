@@ -35,22 +35,22 @@
         <!-- Insert Events -->
         <insert tableName="events">
             <column name="name" value="Football: Real - Barcelona" />
-            <column name="basePrice" value="30.49"/>
+            <column name="price" value="30.49"/>
             <column name="rating" value="LOW"/>
         </insert>
         <insert tableName="events">
             <column name="name" value="The game of thrones" />
-            <column name="basePrice" value="5.99"/>
+            <column name="price" value="5.99"/>
             <column name="rating" value="HIGH"/>
         </insert>
         <insert tableName="events">
             <column name="name" value="Dota 2: The International" />
-            <column name="basePrice" value="15.00"/>
+            <column name="price" value="15.00"/>
             <column name="rating" value="MID"/>
         </insert>
         <insert tableName="events">
             <column name="name" value="Champions League" />
-            <column name="basePrice" value="10.49"/>
+            <column name="price" value="10.49"/>
             <column name="rating" value="LOW"/>
         </insert>
 

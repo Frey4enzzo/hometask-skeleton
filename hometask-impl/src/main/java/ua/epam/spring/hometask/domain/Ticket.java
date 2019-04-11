@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "tickets")
+@Entity
+@Table(name = "tickets")
 public class Ticket implements Comparable<Ticket> {
 
     @Id

@@ -1,19 +1,15 @@
 package ua.epam.spring.hometask.domain;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.NavigableMap;
-import java.util.NavigableSet;
-import java.util.Objects;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 @Data
-@Entity(name = "events")
+@Entity
+@Table(name = "events")
 public class Event {
 
     @Id
@@ -23,8 +19,8 @@ public class Event {
     @NotBlank(message = "Поле name не может быть пустым")
     private String name;
 
-    @Transient
-    private NavigableSet<LocalDateTime> airDates = new TreeSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    private Set<AirDate> airDates = new TreeSet<>();
 
     private double price;
 
@@ -74,7 +70,7 @@ public class Event {
      * @return <code>true</code> if successful, <code>false</code> if already
      *         there
      */
-    public boolean addAirDateTime(LocalDateTime dateTime) {
+    public boolean addAirDateTime(AirDate dateTime) {
         return airDates.add(dateTime);
     }
 
@@ -88,10 +84,10 @@ public class Event {
      * @return <code>true</code> if successful, <code>false</code> if already
      *         there
      */
-    public boolean addAirDateTime(LocalDateTime dateTime, Auditorium auditorium) {
+    public boolean addAirDateTime(AirDate dateTime, Auditorium auditorium) {
         boolean result = airDates.add(dateTime);
         if (result) {
-            auditoriums.put(dateTime, auditorium);
+            auditoriums.put(dateTime.getAirDate(), auditorium);
         }
         return result;
     }
@@ -131,7 +127,7 @@ public class Event {
      * @return <code>true</code> event airs on that date
      */
     public boolean airsOnDate(LocalDate date) {
-        return airDates.stream().anyMatch(dt -> dt.toLocalDate().equals(date));
+        return airDates.stream().anyMatch(dt -> dt.getAirDate().toLocalDate().equals(date));
     }
 
     /**
@@ -146,7 +142,7 @@ public class Event {
      */
     public boolean airsOnDates(LocalDate from, LocalDate to) {
         return airDates.stream()
-                .anyMatch(dt -> dt.toLocalDate().compareTo(from) >= 0 && dt.toLocalDate().compareTo(to) <= 0);
+                .anyMatch(dt -> dt.getAirDate().toLocalDate().compareTo(from) >= 0 && dt.getAirDate().toLocalDate().compareTo(to) <= 0);
     }
 
 }

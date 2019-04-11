@@ -1,24 +1,41 @@
 package ua.epam.spring.hometask.domain;
 
+import lombok.Data;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.NavigableMap;
-import java.util.NavigableSet;
-import java.util.Objects;
-import java.util.TreeMap;
+import java.util.Set;
 import java.util.TreeSet;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
-public class Event extends DomainObject {
+@Data
+@Entity
+@Table(name = "events")
+public class Event {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_event_id")
+    private Long id;
+
+    @NotBlank(message = "Поле name не может быть пустым")
     private String name;
 
-    private NavigableSet<LocalDateTime> airDates = new TreeSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    private Set<AirDate> airDates = new TreeSet<>();
 
-    private double basePrice;
+    private double price;
 
+    @Enumerated(EnumType.STRING)
     private EventRating rating;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    private Set<Ticket> tickets = new TreeSet<>();
+
+    @Transient
     private NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
+
     /**
      * Checks if event is aired on particular <code>dateTime</code> and assigns
      * auditorium to it.
@@ -59,7 +76,7 @@ public class Event extends DomainObject {
      * @return <code>true</code> if successful, <code>false</code> if already
      *         there
      */
-    public boolean addAirDateTime(LocalDateTime dateTime) {
+    public boolean addAirDateTime(AirDate dateTime) {
         return airDates.add(dateTime);
     }
 
@@ -73,10 +90,10 @@ public class Event extends DomainObject {
      * @return <code>true</code> if successful, <code>false</code> if already
      *         there
      */
-    public boolean addAirDateTime(LocalDateTime dateTime, Auditorium auditorium) {
+    public boolean addAirDateTime(AirDate dateTime, Auditorium auditorium) {
         boolean result = airDates.add(dateTime);
         if (result) {
-            auditoriums.put(dateTime, auditorium);
+            auditoriums.put(dateTime.getAirDate(), auditorium);
         }
         return result;
     }
@@ -116,7 +133,7 @@ public class Event extends DomainObject {
      * @return <code>true</code> event airs on that date
      */
     public boolean airsOnDate(LocalDate date) {
-        return airDates.stream().anyMatch(dt -> dt.toLocalDate().equals(date));
+        return airDates.stream().anyMatch(dt -> dt.getAirDate().toLocalDate().equals(date));
     }
 
     /**
@@ -131,84 +148,7 @@ public class Event extends DomainObject {
      */
     public boolean airsOnDates(LocalDate from, LocalDate to) {
         return airDates.stream()
-                .anyMatch(dt -> dt.toLocalDate().compareTo(from) >= 0 && dt.toLocalDate().compareTo(to) <= 0);
+                .anyMatch(dt -> dt.getAirDate().toLocalDate().compareTo(from) >= 0 && dt.getAirDate().toLocalDate().compareTo(to) <= 0);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public NavigableSet<LocalDateTime> getAirDates() {
-        return airDates;
-    }
-
-    public void setAirDates(NavigableSet<LocalDateTime> airDates) {
-        this.airDates = airDates;
-    }
-
-    public double getBasePrice() {
-        return basePrice;
-    }
-
-    public void setBasePrice(double basePrice) {
-        this.basePrice = basePrice;
-    }
-
-    public EventRating getRating() {
-        return rating;
-    }
-
-    public void setRating(EventRating rating) {
-        this.rating = rating;
-    }
-
-    public NavigableMap<LocalDateTime, Auditorium> getAuditoriums() {
-        return auditoriums;
-    }
-
-    public void setAuditoriums(NavigableMap<LocalDateTime, Auditorium> auditoriums) {
-        this.auditoriums = auditoriums;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Event other = (Event) obj;
-        if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!name.equals(other.name)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "name='" + name + '\'' +
-                ", airDates=" + airDates +
-                ", basePrice=" + basePrice +
-                ", rating=" + rating +
-                ", auditoriums=" + auditoriums +
-                '}';
-    }
 }

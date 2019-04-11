@@ -12,7 +12,7 @@ import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.handler.error.ControllerErrorHandler;
 import ua.epam.spring.hometask.service.UserService;
 import javax.validation.Valid;
-import java.util.Collection;
+import java.util.List;
 import static ua.epam.spring.hometask.controller.user.UserControllerMessages.USER_FAILED_VALIDATION;
 import static ua.epam.spring.hometask.controller.user.UserControllerMessages.USER_SUCCESS_CREATE;
 
@@ -30,7 +30,7 @@ public class UserServiceController {
 
     @GetMapping
     @ResponseBody
-    public Collection<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return userService.getAll();
     }
 

@@ -29,5 +29,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .formLogin().disable();
+
+        // need to see h2-database console
+        http.headers().frameOptions().sameOrigin();
     }
 }

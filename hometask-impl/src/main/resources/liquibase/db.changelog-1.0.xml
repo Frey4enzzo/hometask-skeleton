@@ -1,0 +1,72 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="create_tables" author="Alexey_Elnikov">
+
+        <createSequence sequenceName="seq_user_id" startValue="1" incrementBy="1" />
+        <createTable tableName="users">
+            <column name="id" type="numeric(19, 0)" defaultValueSequenceNext="seq_user_id">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="first_name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="last_name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="email" type="varchar(255)" />
+        </createTable>
+
+        <createSequence sequenceName="seq_event_id" startValue="1" incrementBy="1" />
+        <createTable tableName="events">
+            <column name="id" type="numeric(19, 0)" defaultValueSequenceNext="seq_event_id">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="price" type="double(10)">
+                <constraints nullable="false" />
+            </column>
+            <column name="rating" type="varchar(10)" />
+        </createTable>
+
+        <createSequence sequenceName="seq_airdate_id" startValue="1" incrementBy="1" />
+        <createTable tableName="air_dates">
+            <column name="id" type="numeric(19, 0)" defaultValueSequenceNext="seq_airdate_id">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="air_date" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            <column name="event_id" type="numeric(19, 0)">
+                <constraints nullable="false" foreignKeyName="fk_airdate_event" references="events(id)" />
+            </column>
+        </createTable>
+
+        <createSequence sequenceName="seq_ticket_id" startValue="1" incrementBy="1" />
+        <createTable tableName="tickets">
+            <column name="id" type="numeric(19, 0)" defaultValueSequenceNext="seq_event_id">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="seat" type="numeric(10, 0)">
+                <constraints nullable="false" />
+            </column>
+            <column name="date_time" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            <column name="on_sale" type="boolean" />
+            <column name="user_id" type="numeric(19, 0)">
+                <constraints foreignKeyName="fk_user" references="users(id)" />
+            </column>
+            <column name="event_id" type="numeric(19, 0)">
+                <constraints nullable="false" foreignKeyName="fk_event" references="events(id)" />
+            </column>
+        </createTable>
+
+    </changeSet>
+
+
+</databaseChangeLog>

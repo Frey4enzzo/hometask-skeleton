@@ -7,9 +7,10 @@ import ua.epam.spring.hometask.domain.Event;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
-public interface EventService extends AbstractDomainObjectService<Event> {
+public interface EventService {
 
     /**
      * Finding event by name
@@ -39,5 +40,7 @@ public interface EventService extends AbstractDomainObjectService<Event> {
      * @return Set of events
      */
      public @Nonnull Set<Event> getNextEvents(@Nonnull LocalDateTime to);
+
+     List<Event> getAll();
 
 }

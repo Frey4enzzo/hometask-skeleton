@@ -1,5 +1,7 @@
 package ua.epam.spring.hometask.domain;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.NavigableMap;
@@ -8,17 +10,26 @@ import java.util.Objects;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-public class Event extends DomainObject {
+@Entity(name = "events")
+public class Event {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_event_id")
+    private Long id;
+
+    @NotBlank(message = "Поле name не может быть пустым")
     private String name;
 
+    @Transient
     private NavigableSet<LocalDateTime> airDates = new TreeSet<>();
 
     private double basePrice;
 
     private EventRating rating;
 
+    @Transient
     private NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
+
     /**
      * Checks if event is aired on particular <code>dateTime</code> and assigns
      * auditorium to it.

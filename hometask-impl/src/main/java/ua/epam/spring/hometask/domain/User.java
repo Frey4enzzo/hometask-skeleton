@@ -5,10 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ua.epam.spring.hometask.validation.annotations.Email;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.NavigableSet;
 import java.util.TreeSet;
@@ -31,7 +29,8 @@ public class User {
     @Email
     private String email;
 
-    //private NavigableSet<Ticket> tickets = new TreeSet<>();
+    @Transient
+    private NavigableSet<Ticket> tickets = new TreeSet<>();
 
     @JsonCreator
     public User(@JsonProperty(value = "firstName") String firstName,

@@ -54,7 +54,10 @@
             <column name="seat" type="numeric(10, 0)">
                 <constraints nullable="false" />
             </column>
-            <column name="on_sale" type="boolean" />
+            <column name="dateTime" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            <column name="onSale" type="boolean" />
             <column name="user_id" type="numeric(19, 0)">
                 <constraints foreignKeyName="fk_user" references="users(id)" />
             </column>

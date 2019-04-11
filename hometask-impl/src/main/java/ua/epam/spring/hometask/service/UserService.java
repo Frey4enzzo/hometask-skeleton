@@ -4,7 +4,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import ua.epam.spring.hometask.domain.User;
 
-public interface UserService extends AbstractDomainObjectService<User> {
+import java.util.List;
+
+public interface UserService {
 
     /**
      * Finding user by email
@@ -14,5 +16,13 @@ public interface UserService extends AbstractDomainObjectService<User> {
      * @return found user or <code>null</code>
      */
     public @Nullable User getUserByEmail(@Nonnull String email);
+
+    public User getById(Long id);
+
+    List<User> getAll();
+
+    void delete(User user);
+
+    User save(User user);
 
 }

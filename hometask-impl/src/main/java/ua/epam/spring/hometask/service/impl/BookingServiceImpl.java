@@ -2,7 +2,6 @@ package ua.epam.spring.hometask.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.epam.spring.hometask.dao.TicketDao;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
@@ -17,14 +16,6 @@ import static ua.epam.spring.hometask.util.SmartUtils.isEmpty;
 
 @Service
 public class BookingServiceImpl implements BookingService {
-
-    @Autowired
-    private TicketDao ticketDao;
-
-
-    public void setTicketDao(TicketDao ticketDao) {
-        this.ticketDao = ticketDao;
-    }
 
     @Override
     public double getTicketsPrice(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nullable User user, @Nonnull Set<Long> seats) {
@@ -45,7 +36,6 @@ public class BookingServiceImpl implements BookingService {
     @Nonnull
     @Override
     public Set<Ticket> getPurchasedTicketsForEvent(@Nonnull Event event, @Nonnull LocalDateTime dateTime) {
-        return ticketDao.getSoldTicketsForEvent(event).stream().filter
-                (ticket -> ticket.getDateTime().equals(dateTime)).collect(Collectors.toSet());
+        return null;
     }
 }

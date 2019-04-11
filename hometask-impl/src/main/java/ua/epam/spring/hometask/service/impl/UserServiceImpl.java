@@ -7,7 +7,7 @@ import ua.epam.spring.hometask.repository.UserRepository;
 import ua.epam.spring.hometask.service.UserService;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collection;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,12 +22,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(@Nonnull User user) {
-        userRepository.save(user);
+    public User save(@Nonnull User user) {
+        return userRepository.save(user);
     }
 
     @Override
-    public void remove(@Nonnull User user) {
+    public void delete(@Nonnull User user) {
         userRepository.delete(user);
     }
 
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Nonnull
     @Override
-    public Collection<User> getAll() {
+    public List<User> getAll() {
         return userRepository.findAll();
     }
 }

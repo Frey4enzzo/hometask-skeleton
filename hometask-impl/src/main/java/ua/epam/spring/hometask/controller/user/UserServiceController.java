@@ -10,6 +10,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.handler.error.ControllerErrorHandler;
+import ua.epam.spring.hometask.repository.AirDateRepository;
+import ua.epam.spring.hometask.repository.EventRepository;
 import ua.epam.spring.hometask.service.UserService;
 import javax.validation.Valid;
 import java.util.Collection;
@@ -18,7 +20,7 @@ import static ua.epam.spring.hometask.controller.user.UserControllerMessages.USE
 
 @RestController
 @Slf4j
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/users", produces = "text/plain;charset=UTF-8")
 public class UserServiceController {
 
     @Autowired
@@ -39,7 +41,7 @@ public class UserServiceController {
         return userService.getById(userId);
     }
 
-    @PostMapping(value = "/add", produces = "text/plain;charset=UTF-8")
+    @PostMapping(value = "/add")
     public ResponseEntity<String> addUser(@RequestBody @Valid User user, Errors errors) {
         if (errors.hasErrors()) {
             return controllerErrorHandler.handleControllerValidationError(errors, USER_FAILED_VALIDATION, HttpStatus.BAD_REQUEST);

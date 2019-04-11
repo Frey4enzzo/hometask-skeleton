@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public interface EventService extends AbstractDomainObjectService<Event> {
+public interface EventService {
 
     /**
      * Finding event by name

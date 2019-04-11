@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ua.epam.spring.hometask.validation.annotations.Email;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.NavigableSet;

@@ -1,5 +1,8 @@
 package ua.epam.spring.hometask.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,6 +16,9 @@ import java.util.TreeMap;
 @Data
 @Entity
 @Table(name = "events")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Event {
 
     @Id
@@ -23,6 +29,7 @@ public class Event {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    @JsonManagedReference
     private Set<AirDate> airDates = new TreeSet<>();
 
     private double price;

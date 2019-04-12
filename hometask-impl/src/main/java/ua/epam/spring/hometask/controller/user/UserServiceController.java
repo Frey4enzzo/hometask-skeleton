@@ -63,7 +63,7 @@ public class UserServiceController {
     }
 
     @GetMapping(value = "/delete/{userId}", produces = "text/plain;charset=UTF-8")
-    public ResponseEntity<String> delete(@PathVariable("userId") Long userId) {
+    public ResponseEntity<String> deleteUser(@PathVariable("userId") Long userId) {
         Optional<User> user = ofNullable(userService.getById(userId));
         if (user.isPresent()) {
             userService.delete(user.get());

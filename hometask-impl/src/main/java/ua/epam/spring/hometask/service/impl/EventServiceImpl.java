@@ -47,4 +47,8 @@ public class EventServiceImpl implements EventService {
     public List<Event> getAll() {
         return Lists.newArrayList(eventRepository.findAll());
     }
+
+    public void delete(Event event) {
+        eventRepository.delete(event);
+    }
 }

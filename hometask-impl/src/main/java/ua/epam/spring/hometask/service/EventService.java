@@ -21,7 +21,7 @@ public interface EventService {
      *            Name of the event
      * @return found event or <code>null</code>
      */
-    public @Nullable Event getByName(@Nonnull String name);
+    @Nullable Event getByName(@Nonnull String name);
 
      /**
      * Finding all events that air on specified date range
@@ -44,5 +44,7 @@ public interface EventService {
      public @Nonnull Set<Event> getNextEvents(@Nonnull LocalDateTime to);
 
      List<Event> getAll();
+
+     void delete(@Nonnull Event event);
 
 }

@@ -13,6 +13,8 @@ import ua.epam.spring.hometask.handler.error.ControllerErrorHandler;
 import ua.epam.spring.hometask.service.UserService;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
+import static java.util.Optional.ofNullable;
 import static ua.epam.spring.hometask.controller.user.UserControllerMessages.USER_FAILED_VALIDATION;
 import static ua.epam.spring.hometask.controller.user.UserControllerMessages.USER_SUCCESS_CREATE;
 
@@ -46,5 +48,12 @@ public class UserServiceController {
         }
         userService.save(user);
         return ResponseEntity.ok(defaultMessageSource.getMessage(USER_SUCCESS_CREATE, null, LocaleContextHolder.getLocale()));
+    }
+
+    @GetMapping(value = "/find/{email:.+}")
+    public ResponseEntity<User> findByEmail(@PathVariable(value = "email") String email) {
+        Optional<User> user = ofNullable(userService.getUserByEmail(email));
+        if (user.isPresent()) return ResponseEntity.ok(user.get());
+        else return ResponseEntity.of(user);
     }
 }

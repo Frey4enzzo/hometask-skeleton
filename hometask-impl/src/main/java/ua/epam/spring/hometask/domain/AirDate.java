@@ -28,7 +28,6 @@ public class AirDate {
     private LocalDateTime airDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @NotNull
-    @JoinColumn(name = "event_id", nullable = false)
+    @JoinColumn(name = "event_id")
     private Event event;
 }

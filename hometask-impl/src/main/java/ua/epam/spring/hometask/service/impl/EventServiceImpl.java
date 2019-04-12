@@ -22,9 +22,13 @@ public class EventServiceImpl implements EventService {
     @Autowired
     EventRepository eventRepository;
 
+    public Event getById(@Nonnull Long id) {
+        return ofNullable(eventRepository.findById(id)).orElseGet(null).get();
+    }
+
     @Nullable
     public Event getByName(@Nonnull String name) {
-        return ofNullable(eventRepository.findByName(name)).orElseGet(null);
+        return ofNullable(eventRepository.findByName(name)).get();
     }
 
     @Nonnull

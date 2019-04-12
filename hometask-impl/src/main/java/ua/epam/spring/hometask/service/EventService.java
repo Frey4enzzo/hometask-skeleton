@@ -12,6 +12,8 @@ import java.util.Set;
 
 public interface EventService {
 
+    Event getById(Long id);
+
     /**
      * Finding event by name
      * 

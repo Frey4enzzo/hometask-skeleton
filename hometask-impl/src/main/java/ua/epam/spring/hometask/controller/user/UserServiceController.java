@@ -37,8 +37,13 @@ public class UserServiceController {
     }
 
     @GetMapping(value = "/{userId}")
-    public User getUser(@PathVariable("userId") Long userId) {
-        return userService.getById(userId);
+    public ResponseEntity<User> getUser(@PathVariable("userId") Long userId) {
+        Optional<User> user = ofNullable(userService.getById(userId));
+        if (user.isPresent()) {
+            return ResponseEntity.of(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping(value = "/add", produces = "text/plain;charset=UTF-8")
@@ -55,5 +60,16 @@ public class UserServiceController {
         Optional<User> user = ofNullable(userService.getUserByEmail(email));
         if (user.isPresent()) return ResponseEntity.ok(user.get());
         else return ResponseEntity.of(user);
+    }
+
+    @GetMapping(value = "/delete/{userId}", produces = "text/plain;charset=UTF-8")
+    public ResponseEntity<String> delete(@PathVariable("userId") Long userId) {
+        Optional<User> user = ofNullable(userService.getById(userId));
+        if (user.isPresent()) {
+            userService.delete(user.get());
+            return ResponseEntity.ok("Пользователь удален: " + user.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

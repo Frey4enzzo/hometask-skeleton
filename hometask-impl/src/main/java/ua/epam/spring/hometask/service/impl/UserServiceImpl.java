@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void delete(@Nonnull User user) {
+        log.info("Удаление пользователя: {}", user);
         userRepository.delete(user);
     }
 

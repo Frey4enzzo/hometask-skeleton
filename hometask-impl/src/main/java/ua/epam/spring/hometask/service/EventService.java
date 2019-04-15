@@ -47,4 +47,6 @@ public interface EventService {
 
      void delete(@Nonnull Event event);
 
+     Event save(Event event);
+
 }

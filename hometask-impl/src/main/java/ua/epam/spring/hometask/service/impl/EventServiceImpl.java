@@ -1,6 +1,7 @@
 package ua.epam.spring.hometask.service.impl;
 
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.epam.spring.hometask.domain.Event;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 import static java.util.Optional.ofNullable;
 
 @Service
+@Slf4j
 public class EventServiceImpl implements EventService {
 
     @Autowired
@@ -34,12 +36,14 @@ public class EventServiceImpl implements EventService {
     @Nonnull
     @Override
     public Set<Event> getForDateRange(@Nonnull LocalDate from, @Nonnull LocalDate to) {
+        log.info("Показать события c: {} по: {}", from, to);
         return getAll().stream().filter(event -> event.airsOnDates(from, to)).collect(Collectors.toSet());
     }
 
     @Nonnull
     @Override
     public Set<Event> getNextEvents(@Nonnull LocalDateTime to) {
+        log.info("Показать следующие события с текущшей даты: {}", to);
         return getAll().stream().filter(event -> event.airsOnDates(LocalDate.now(), to.toLocalDate())).collect(Collectors.toSet());
     }
 
@@ -50,5 +54,13 @@ public class EventServiceImpl implements EventService {
 
     public void delete(Event event) {
         eventRepository.delete(event);
+        log.info("Событие удалено: {}", event);
+    }
+
+    @Override
+    public Event save(Event event) {
+        Event newEvent = eventRepository.save(event);
+        log.info("Создано новое событие: {}", newEvent);
+        return newEvent;
     }
 }

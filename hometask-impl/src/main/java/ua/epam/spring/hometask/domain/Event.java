@@ -1,11 +1,11 @@
 package ua.epam.spring.hometask.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -16,22 +16,21 @@ import java.util.TreeMap;
 @Data
 @Entity
 @Table(name = "events")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+@NoArgsConstructor
 public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_event_id")
     private Long id;
 
-    @NotBlank(message = "Поле name не может быть пустым")
+    @NotBlank(message = "Название мероприятия должно быть указано")
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     @JsonManagedReference
     private Set<AirDate> airDates = new TreeSet<>();
 
+    @NotNull
     private double price;
 
     @Enumerated(EnumType.STRING)
@@ -42,6 +41,15 @@ public class Event {
 
     @Transient
     private NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
+
+    @JsonCreator
+    public Event(@JsonProperty(value = "name") String name,
+                 @JsonProperty(value = "price") double price,
+                 @JsonProperty(value = "rating") EventRating rating) {
+        this.name = name;
+        this.price = price;
+        this.rating = rating;
+    }
 
     /**
      * Checks if event is aired on particular <code>dateTime</code> and assigns

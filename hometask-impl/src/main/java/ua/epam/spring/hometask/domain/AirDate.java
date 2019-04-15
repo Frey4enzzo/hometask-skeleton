@@ -1,5 +1,6 @@
 package ua.epam.spring.hometask.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -29,5 +30,6 @@ public class AirDate {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
+    @JsonBackReference
     private Event event;
 }

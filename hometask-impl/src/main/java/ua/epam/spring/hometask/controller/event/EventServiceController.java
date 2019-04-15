@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -12,8 +13,10 @@ import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.handler.error.ControllerErrorHandler;
 import ua.epam.spring.hometask.service.EventService;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import static java.util.Optional.ofNullable;
 import static ua.epam.spring.hometask.controller.event.EventControllerMessages.EVENT_FAILED_VALIDATION;
 import static ua.epam.spring.hometask.controller.event.EventControllerMessages.EVENT_SUCCESS_CREATE;
@@ -62,5 +65,10 @@ public class EventServiceController {
         }
     }
 
+    @GetMapping(value = "/next/{date}", produces = "application/json")
+    public Set<Event> getNextEvents(@PathVariable(name = "date", required = false)
+                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
+        return eventService.getNextEvents(date);
+    }
 
 }

@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -30,7 +29,6 @@ public class Event {
     @JsonManagedReference
     private Set<AirDate> airDates = new TreeSet<>();
 
-    @NotNull
     private double price;
 
     @Enumerated(EnumType.STRING)
@@ -41,15 +39,6 @@ public class Event {
 
     @Transient
     private NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
-
-    @JsonCreator
-    public Event(@JsonProperty(value = "name") String name,
-                 @JsonProperty(value = "price") double price,
-                 @JsonProperty(value = "rating") EventRating rating) {
-        this.name = name;
-        this.price = price;
-        this.rating = rating;
-    }
 
     /**
      * Checks if event is aired on particular <code>dateTime</code> and assigns
@@ -166,4 +155,8 @@ public class Event {
                 .anyMatch(dt -> dt.getAirDate().toLocalDate().compareTo(from) >= 0 && dt.getAirDate().toLocalDate().compareTo(to) <= 0);
     }
 
+    public boolean airsOnDates(LocalDateTime from, LocalDateTime to) {
+        return airDates.stream()
+                .anyMatch(dt -> dt.getAirDate().isAfter(from) && dt.getAirDate().isBefore(to));
+    }
 }

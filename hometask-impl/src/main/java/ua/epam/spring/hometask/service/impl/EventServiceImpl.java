@@ -43,8 +43,8 @@ public class EventServiceImpl implements EventService {
     @Nonnull
     @Override
     public Set<Event> getNextEvents(@Nonnull LocalDateTime to) {
-        log.info("Показать следующие события с текущшей даты: {}", to);
-        return getAll().stream().filter(event -> event.airsOnDates(LocalDate.now(), to.toLocalDate())).collect(Collectors.toSet());
+        log.info("Показать следующие события с текущшей даты по: {}", to);
+        return getAll().stream().filter(event -> event.airsOnDates(LocalDateTime.now(), to)).collect(Collectors.toSet());
     }
 
     @Override

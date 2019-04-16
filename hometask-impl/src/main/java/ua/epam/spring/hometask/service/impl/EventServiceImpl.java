@@ -4,7 +4,9 @@ import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.epam.spring.hometask.domain.AirDate;
 import ua.epam.spring.hometask.domain.Event;
+import ua.epam.spring.hometask.repository.AirDateRepository;
 import ua.epam.spring.hometask.repository.EventRepository;
 import ua.epam.spring.hometask.service.EventService;
 import javax.annotation.Nonnull;
@@ -12,6 +14,7 @@ import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,6 +26,8 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     EventRepository eventRepository;
+    @Autowired
+    AirDateRepository airDateRepository;
 
     public Event getById(@Nonnull Long id) {
         return ofNullable(eventRepository.findById(id)).orElseGet(null).get();
@@ -62,5 +67,13 @@ public class EventServiceImpl implements EventService {
         Event newEvent = eventRepository.save(event);
         log.info("Создано новое событие: {}", newEvent);
         return newEvent;
+    }
+
+    @Override
+    public void addAirDate(Long eventId, LocalDateTime airDate) {
+        Optional<Event> event = ofNullable(eventRepository.findById(eventId)).get();
+        AirDate date = airDateRepository.save(new AirDate(airDate, event.get()));
+        event.get().addAirDateTime(date);
+        log.info("Новая дата успешно добавлена к событию {}", event.get());
     }
 }

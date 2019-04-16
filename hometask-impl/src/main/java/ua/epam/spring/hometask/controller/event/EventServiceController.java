@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import ua.epam.spring.hometask.domain.AirDate;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.handler.error.ControllerErrorHandler;
 import ua.epam.spring.hometask.service.EventService;
@@ -67,15 +68,23 @@ public class EventServiceController {
     }
 
     @GetMapping(value = "/next/{date}", produces = "application/json")
-    public Set<Event> getNextEvents(@PathVariable(name = "date", required = false)
-                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
+    public Set<Event> getNextEvents(@PathVariable(name = "date")
+                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
         return eventService.getNextEvents(date);
     }
 
     @GetMapping(value = "range")
-    public Set<Event> getEventsForDateRange(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate startDate,
-                                            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate endDate) {
+    public Set<Event> getEventsForDateRange(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return eventService.getForDateRange(startDate, endDate);
     }
 
+    @PostMapping(value = "/add/{eventId}/airdate/{date}", produces = "text/plain;charset=UTF-8")
+    public ResponseEntity<String> addAirDateForEvent(@PathVariable(name = "eventId") Long eventId,
+                                                     @PathVariable(name = "date")
+                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date ) {
+
+        eventService.addAirDate(eventId, date);
+        return ResponseEntity.ok("Новая дата успешно добавлена к событию");
+    }
 }

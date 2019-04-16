@@ -3,6 +3,7 @@ package ua.epam.spring.hometask.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(exclude = "event")
 @ToString(exclude = "event")
+@NoArgsConstructor
 @Entity
 @Table(name = "air_dates")
 public class AirDate {
@@ -32,4 +34,13 @@ public class AirDate {
     @JoinColumn(name = "event_id")
     @JsonBackReference
     private Event event;
+
+    public AirDate(LocalDateTime airDate) {
+        this.airDate = airDate;
+    }
+
+    public AirDate(LocalDateTime airDate, Event event) {
+        this.airDate = airDate;
+        this.event = event;
+    }
 }

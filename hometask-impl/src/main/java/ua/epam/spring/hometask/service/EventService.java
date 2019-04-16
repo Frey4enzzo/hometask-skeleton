@@ -3,6 +3,7 @@ package ua.epam.spring.hometask.service;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import ua.epam.spring.hometask.domain.AirDate;
 import ua.epam.spring.hometask.domain.Event;
 
 import java.time.LocalDate;
@@ -48,5 +49,7 @@ public interface EventService {
      void delete(@Nonnull Event event);
 
      Event save(Event event);
+
+     void addAirDate(Long eventId, LocalDateTime airDate);
 
 }

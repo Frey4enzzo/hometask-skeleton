@@ -13,6 +13,7 @@ import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.handler.error.ControllerErrorHandler;
 import ua.epam.spring.hometask.service.EventService;
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -69,6 +70,12 @@ public class EventServiceController {
     public Set<Event> getNextEvents(@PathVariable(name = "date", required = false)
                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
         return eventService.getNextEvents(date);
+    }
+
+    @GetMapping(value = "range")
+    public Set<Event> getEventsForDateRange(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate startDate,
+                                            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate endDate) {
+        return eventService.getForDateRange(startDate, endDate);
     }
 
 }

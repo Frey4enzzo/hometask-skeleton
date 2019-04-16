@@ -82,7 +82,7 @@ public class EventServiceImpl implements EventService {
         Optional<Event> event = ofNullable(eventRepository.findById(eventId)).get();
         AirDate date = airDateRepository.findByAirDate(airDate);
         if (event.get().getAirDates().contains(date)) {
-            event.get().removeAirDateTime(airDate);
+            event.get().removeAirDateTime(date);
             airDateRepository.delete(date);
             log.info("Дата показа успешно удалена из события: ", event.get());
         } else {

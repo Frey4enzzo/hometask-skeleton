@@ -110,7 +110,7 @@ public class Event {
      *            Date and time to remove
      * @return <code>true</code> if successful, <code>false</code> if not there
      */
-    public boolean removeAirDateTime(LocalDateTime dateTime) {
+    public boolean removeAirDateTime(AirDate dateTime) {
         boolean result = airDates.remove(dateTime);
         if (result) {
             auditoriums.remove(dateTime);

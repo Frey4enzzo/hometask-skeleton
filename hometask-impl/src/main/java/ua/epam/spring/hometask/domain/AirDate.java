@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "air_dates")
-public class AirDate {
+public class AirDate implements Comparable<AirDate>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_airdate_id")
@@ -36,5 +36,12 @@ public class AirDate {
     public AirDate(LocalDateTime airDate, Event event) {
         this.airDate = airDate;
         this.event = event;
+    }
+
+    @Override
+    public int compareTo(AirDate other) {
+        if (this.airDate.equals(other)) return 0;
+        if (this.airDate.isAfter(other.airDate)) return 1;
+        return -1;
     }
 }

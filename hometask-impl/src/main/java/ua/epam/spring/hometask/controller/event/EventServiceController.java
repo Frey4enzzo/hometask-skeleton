@@ -87,4 +87,13 @@ public class EventServiceController {
         eventService.addAirDate(eventId, date);
         return ResponseEntity.ok("Новая дата успешно добавлена к событию");
     }
+
+    @PostMapping(value = "/delete/{eventId}/airdate/{date}", produces = "text/plain;charset=UTF-8")
+    public ResponseEntity<String> deleteAirDateForEvent(@PathVariable(name = "eventId") Long eventId,
+                                                     @PathVariable(name = "date")
+                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date ) {
+
+        eventService.deleteAirDate(eventId, date);
+        return ResponseEntity.ok("Дата успешно удалена");
+    }
 }

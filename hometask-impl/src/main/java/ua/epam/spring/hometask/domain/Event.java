@@ -25,7 +25,7 @@ public class Event {
     @NotBlank(message = "Название мероприятия должно быть указано")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event", orphanRemoval = true)
     @JsonManagedReference
     private Set<AirDate> airDates = new TreeSet<>();
 

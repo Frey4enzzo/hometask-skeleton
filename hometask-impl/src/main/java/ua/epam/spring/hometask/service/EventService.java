@@ -52,4 +52,6 @@ public interface EventService {
 
      void addAirDate(Long eventId, LocalDateTime airDate);
 
+     void deleteAirDate(Long eventId, LocalDateTime airDate);
+
 }

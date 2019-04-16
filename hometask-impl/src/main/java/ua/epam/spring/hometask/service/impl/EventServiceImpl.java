@@ -76,4 +76,17 @@ public class EventServiceImpl implements EventService {
         event.get().addAirDateTime(date);
         log.info("Новая дата успешно добавлена к событию {}", event.get());
     }
+
+    @Override
+    public void deleteAirDate(Long eventId, LocalDateTime airDate) {
+        Optional<Event> event = ofNullable(eventRepository.findById(eventId)).get();
+        AirDate date = airDateRepository.findByAirDate(airDate);
+        if (event.get().getAirDates().contains(date)) {
+            event.get().removeAirDateTime(airDate);
+            airDateRepository.delete(date);
+            log.info("Дата показа успешно удалена из события: ", event.get());
+        } else {
+            log.info("Дата показа не была удалена из события: ", event.get());
+        }
+    }
 }

@@ -86,7 +86,7 @@ public class EventServiceImpl implements EventService {
             airDateRepository.delete(date);
             log.info("Дата показа успешно удалена из события: ", event.get());
         } else {
-            log.info("Дата показа не была удалена из события: ", event.get());
+            log.info("Удаление даты невозможно, дата не была запланирована: ", event.get());
         }
     }
 }

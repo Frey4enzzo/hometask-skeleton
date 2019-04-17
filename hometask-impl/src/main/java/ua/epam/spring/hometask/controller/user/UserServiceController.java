@@ -15,8 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import static java.util.Optional.ofNullable;
-import static ua.epam.spring.hometask.controller.user.UserControllerMessages.USER_FAILED_VALIDATION;
-import static ua.epam.spring.hometask.controller.user.UserControllerMessages.USER_SUCCESS_CREATE;
+import static ua.epam.spring.hometask.controller.user.UserControllerMessages.*;
 
 @RestController
 @Slf4j
@@ -26,14 +25,13 @@ public class UserServiceController {
     @Autowired
     private UserService userService;
     @Autowired
-    private MessageSource defaultMessageSource;
+    private MessageSource messageSource;
     @Autowired
-    ControllerErrorHandler controllerErrorHandler;
+    private ControllerErrorHandler controllerErrorHandler;
 
     @GetMapping
-    @ResponseBody
-    public List<User> getAllUsers() {
-        return userService.getAll();
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAll());
     }
 
     @GetMapping(value = "/{userId}")
@@ -51,8 +49,12 @@ public class UserServiceController {
         if (errors.hasErrors()) {
             return controllerErrorHandler.handleControllerValidationError(errors, USER_FAILED_VALIDATION, HttpStatus.BAD_REQUEST);
         }
-        userService.save(user);
-        return ResponseEntity.ok(defaultMessageSource.getMessage(USER_SUCCESS_CREATE, null, LocaleContextHolder.getLocale()));
+        User savedUser = userService.save(user);
+        if (savedUser != null) {
+            return ResponseEntity.ok(messageSource.getMessage(USER_SUCCESS_CREATE, null, LocaleContextHolder.getLocale()));
+        } else {
+            return ResponseEntity.ok(messageSource.getMessage(USER_CREATED_FAILED_EXISTS, null, LocaleContextHolder.getLocale()));
+        }
     }
 
     @GetMapping(value = "/find/{email:.+}")

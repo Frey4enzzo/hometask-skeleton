@@ -38,7 +38,7 @@ public class UserServiceController {
     public ResponseEntity<User> getUser(@PathVariable("userId") Long userId) {
         Optional<User> user = ofNullable(userService.getById(userId));
         if (user.isPresent()) {
-            return ResponseEntity.of(user);
+            return ResponseEntity.ok(user.get());
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -61,7 +61,7 @@ public class UserServiceController {
     public ResponseEntity<User> findByEmail(@PathVariable(value = "email") String email) {
         Optional<User> user = ofNullable(userService.getUserByEmail(email));
         if (user.isPresent()) return ResponseEntity.ok(user.get());
-        else return ResponseEntity.of(user);
+        else return ResponseEntity.notFound().build();
     }
 
     @GetMapping(value = "/delete/{userId}", produces = "text/plain;charset=UTF-8")

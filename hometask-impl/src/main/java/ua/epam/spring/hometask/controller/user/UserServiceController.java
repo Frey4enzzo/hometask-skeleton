@@ -64,7 +64,7 @@ public class UserServiceController {
         else return ResponseEntity.notFound().build();
     }
 
-    @GetMapping(value = "/delete/{userId}", produces = "text/plain;charset=UTF-8")
+    @PostMapping(value = "/delete/{userId}", produces = "text/plain;charset=UTF-8")
     public ResponseEntity<String> deleteUser(@PathVariable("userId") Long userId) {
         Optional<User> user = ofNullable(userService.getById(userId));
         if (user.isPresent()) {

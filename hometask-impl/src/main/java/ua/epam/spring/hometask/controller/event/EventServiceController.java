@@ -36,8 +36,8 @@ public class EventServiceController {
     ControllerErrorHandler controllerErrorHandler;
 
     @GetMapping(produces = "application/json")
-    public List<Event> getAllEvents() {
-        return eventService.getAll();
+    public ResponseEntity<List<Event>> getAllEvents() {
+        return ResponseEntity.ok(eventService.getAll());
     }
 
     @GetMapping(value = "/{eventId}")

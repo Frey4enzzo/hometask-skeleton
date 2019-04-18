@@ -59,7 +59,7 @@ public class UserServiceControllerTest {
     @Test
     public void getUserTest() throws Exception {
         //given:
-        when(userService.getById(1L)).thenReturn(new User());
+        when(userService.getById(1L)).thenReturn(user);
         String userIdPath = "/1";
 
         //when:
@@ -85,13 +85,26 @@ public class UserServiceControllerTest {
     public void getUserByEmailTest() throws Exception {
         //given:
         String findEmailPath = "/find/qwerty@email.ru";
-        when(userService.getUserByEmail("qwerty@email.ru")).thenReturn(new User());
+        when(userService.getUserByEmail("qwerty@email.ru")).thenReturn(user);
 
         //when:
         ResultActions resultActions = mockMvc.perform(get(URL + findEmailPath));
 
         //then:
         resultActions.andExpect(status().isOk());
+    }
+
+    @Test
+    public void getUserByEmailNotFoundTest() throws Exception {
+        //given:
+        String findEmailPath = "/find/qwerty@email.ru";
+        when(userService.getUserByEmail("qwerty@email.ru")).thenReturn(null);
+
+        //when:
+        ResultActions resultActions = mockMvc.perform(get(URL + findEmailPath));
+
+        //then:
+        resultActions.andExpect(status().isNotFound());
     }
 
     @Test

@@ -20,8 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import static java.util.Optional.ofNullable;
-import static ua.epam.spring.hometask.controller.event.EventControllerMessages.EVENT_FAILED_VALIDATION;
-import static ua.epam.spring.hometask.controller.event.EventControllerMessages.EVENT_SUCCESS_CREATE;
+import static ua.epam.spring.hometask.controller.event.EventControllerMessages.*;
 
 @RestController
 @Slf4j
@@ -52,8 +51,12 @@ public class EventServiceController {
         if (errors.hasErrors()) {
             return controllerErrorHandler.handleControllerValidationError(errors, EVENT_FAILED_VALIDATION, HttpStatus.BAD_REQUEST);
         }
-        eventService.save(event);
-        return ResponseEntity.ok(defaultMessageSource.getMessage(EVENT_SUCCESS_CREATE, null, LocaleContextHolder.getLocale()));
+        Event newEvent = eventService.save(event);
+        if (newEvent != null) {
+            return ResponseEntity.ok(defaultMessageSource.getMessage(EVENT_SUCCESS_CREATE, null, LocaleContextHolder.getLocale()));
+        } else {
+            return ResponseEntity.ok(defaultMessageSource.getMessage(EVENT_CREATED_FAILED_EXISTS, null, LocaleContextHolder.getLocale()));
+        }
     }
 
     @GetMapping(value = "/delete/{eventId}", produces = "text/plain;charset=UTF-8")
@@ -68,15 +71,15 @@ public class EventServiceController {
     }
 
     @GetMapping(value = "/next/{date}", produces = "application/json")
-    public Set<Event> getNextEvents(@PathVariable(name = "date")
+    public ResponseEntity<Set<Event>> getNextEvents(@PathVariable(name = "date")
                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
-        return eventService.getNextEvents(date);
+        return ResponseEntity.ok(eventService.getNextEvents(date));
     }
 
-    @GetMapping(value = "range")
-    public Set<Event> getEventsForDateRange(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+    @GetMapping(value = "/range")
+    public ResponseEntity<Set<Event>> getEventsForDateRange(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        return eventService.getForDateRange(startDate, endDate);
+        return ResponseEntity.ok(eventService.getForDateRange(startDate, endDate));
     }
 
     @PostMapping(value = "/add/{eventId}/airdate/{date}", produces = "text/plain;charset=UTF-8")

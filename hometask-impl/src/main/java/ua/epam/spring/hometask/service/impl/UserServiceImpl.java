@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public User save(@Nonnull User user) {
-        User dbUser= userRepository.findByEmail(user.getEmail());
-        if (dbUser == null) return userRepository.save(user);
+        User newUser= userRepository.findByEmail(user.getEmail());
+        if (newUser == null) return userRepository.save(user);
         return null;
     }
 

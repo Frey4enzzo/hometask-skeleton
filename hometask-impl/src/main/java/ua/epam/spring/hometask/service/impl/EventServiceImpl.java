@@ -64,9 +64,9 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event save(Event event) {
-        Event newEvent = eventRepository.save(event);
-        log.info("Создано новое событие: {}", newEvent);
-        return newEvent;
+        Event newEvent = eventRepository.findByName(event.getName());
+        if (newEvent == null) return eventRepository.save(event);
+        return null;
     }
 
     @Override

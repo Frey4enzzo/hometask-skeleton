@@ -1,6 +1,8 @@
 package ua.epam.spring.hometask.domain;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
@@ -13,16 +15,18 @@ import java.util.TreeMap;
 @Data
 @Entity
 @Table(name = "events")
+@NoArgsConstructor
 public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_event_id")
     private Long id;
 
-    @NotBlank(message = "Поле name не может быть пустым")
+    @NotBlank(message = "Название мероприятия должно быть указано")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event", orphanRemoval = true)
+    @JsonManagedReference
     private Set<AirDate> airDates = new TreeSet<>();
 
     private double price;
@@ -106,7 +110,7 @@ public class Event {
      *            Date and time to remove
      * @return <code>true</code> if successful, <code>false</code> if not there
      */
-    public boolean removeAirDateTime(LocalDateTime dateTime) {
+    public boolean removeAirDateTime(AirDate dateTime) {
         boolean result = airDates.remove(dateTime);
         if (result) {
             auditoriums.remove(dateTime);
@@ -151,4 +155,8 @@ public class Event {
                 .anyMatch(dt -> dt.getAirDate().toLocalDate().compareTo(from) >= 0 && dt.getAirDate().toLocalDate().compareTo(to) <= 0);
     }
 
+    public boolean airsOnDates(LocalDateTime from, LocalDateTime to) {
+        return airDates.stream()
+                .anyMatch(dt -> dt.getAirDate().isAfter(from) && dt.getAirDate().isBefore(to));
+    }
 }

@@ -3,6 +3,7 @@ package ua.epam.spring.hometask.service;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import ua.epam.spring.hometask.domain.AirDate;
 import ua.epam.spring.hometask.domain.Event;
 
 import java.time.LocalDate;
@@ -12,6 +13,8 @@ import java.util.Set;
 
 public interface EventService {
 
+    Event getById(Long id);
+
     /**
      * Finding event by name
      * 
@@ -19,7 +22,7 @@ public interface EventService {
      *            Name of the event
      * @return found event or <code>null</code>
      */
-    public @Nullable Event getByName(@Nonnull String name);
+    @Nullable Event getByName(@Nonnull String name);
 
      /**
      * Finding all events that air on specified date range
@@ -42,5 +45,13 @@ public interface EventService {
      public @Nonnull Set<Event> getNextEvents(@Nonnull LocalDateTime to);
 
      List<Event> getAll();
+
+     void delete(@Nonnull Event event);
+
+     Event save(Event event);
+
+     void addAirDate(Long eventId, LocalDateTime airDate);
+
+     void deleteAirDate(Long eventId, LocalDateTime airDate);
 
 }

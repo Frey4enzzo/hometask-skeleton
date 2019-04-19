@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class AppConfiguration {
 
     @Bean
-    public ResourceBundleMessageSource defaultMessageSource() {
+    public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource source = new ResourceBundleMessageSource();
         source.setBasenames("messages/messages");
         source.setDefaultEncoding("UTF-8");

@@ -1,6 +1,5 @@
 package ua.epam.spring.hometask.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
@@ -10,9 +9,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.stream.Collectors;
-
-import static ua.epam.spring.hometask.util.SmartUtils.isEmpty;
 
 @Service
 public class BookingServiceImpl implements BookingService {

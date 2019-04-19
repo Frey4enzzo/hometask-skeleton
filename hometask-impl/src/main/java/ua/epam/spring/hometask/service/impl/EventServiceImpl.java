@@ -30,12 +30,12 @@ public class EventServiceImpl implements EventService {
     AirDateRepository airDateRepository;
 
     public Event getById(@Nonnull Long id) {
-        return ofNullable(eventRepository.findById(id)).orElseGet(null).get();
+        return eventRepository.findById(id).orElse(null);
     }
 
     @Nullable
     public Event getByName(@Nonnull String name) {
-        return ofNullable(eventRepository.findByName(name)).get();
+        return eventRepository.findByName(name);
     }
 
     @Nonnull
@@ -64,7 +64,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event save(Event event) {
-        Event newEvent = eventRepository.findByName(event.getName());
+        Event newEvent = getByName(event.getName());
         if (newEvent == null) return eventRepository.save(event);
         return null;
     }

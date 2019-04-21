@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import ua.epam.spring.hometask.domain.AirDate;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.handler.error.ControllerErrorHandler;
 import ua.epam.spring.hometask.service.EventService;
@@ -30,7 +29,7 @@ public class EventServiceController {
     @Autowired
     private EventService eventService;
     @Autowired
-    private MessageSource defaultMessageSource;
+    private MessageSource messageSource;
     @Autowired
     ControllerErrorHandler controllerErrorHandler;
 
@@ -53,9 +52,10 @@ public class EventServiceController {
         }
         Event newEvent = eventService.save(event);
         if (newEvent != null) {
-            return ResponseEntity.ok(defaultMessageSource.getMessage(EVENT_SUCCESS_CREATE, null, LocaleContextHolder.getLocale()));
+            log.info("Новое событие создано: {}", event);
+            return ResponseEntity.ok(messageSource.getMessage(EVENT_SUCCESS_CREATE, null, LocaleContextHolder.getLocale()));
         } else {
-            return ResponseEntity.ok(defaultMessageSource.getMessage(EVENT_CREATED_FAILED_EXISTS, null, LocaleContextHolder.getLocale()));
+            return ResponseEntity.ok(messageSource.getMessage(EVENT_CREATED_FAILED_EXISTS, null, LocaleContextHolder.getLocale()));
         }
     }
 

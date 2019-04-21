@@ -51,8 +51,10 @@ public class UserServiceController {
         }
         User savedUser = userService.save(user);
         if (savedUser != null) {
+            log.info("Новый пользователь создан: {}", user);
             return ResponseEntity.ok(messageSource.getMessage(USER_SUCCESS_CREATE, null, LocaleContextHolder.getLocale()));
         } else {
+            log.info("Такой пользователь уже существует");
             return ResponseEntity.ok(messageSource.getMessage(USER_CREATED_FAILED_EXISTS, null, LocaleContextHolder.getLocale()));
         }
     }

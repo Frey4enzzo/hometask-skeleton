@@ -43,7 +43,7 @@ public class EventServiceControllerTest {
     @MockBean
     private EventService eventService;
     @Autowired
-    private MessageSource defaultMessageSource;
+    private MessageSource messageSource;
     @MockBean
     ControllerErrorHandler controllerErrorHandler;
 

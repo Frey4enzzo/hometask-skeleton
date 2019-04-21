@@ -151,4 +151,16 @@ public class EventServiceTest {
 
         assertNull(newEvent);
     }
+
+    @Test
+    public void deleteTest() {
+        //given:
+        doNothing().when(eventRepository).delete(event);
+
+        //when:
+        eventService.delete(event);
+
+        //then:
+        verify(eventRepository, times(1)).delete(event);
+    }
 }

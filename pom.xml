@@ -21,6 +21,7 @@
 
     <modules>
         <module>hometask-impl</module>
+        <module>hometask-security</module>
     </modules>
 
     <properties>

@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = EventServiceController.class)
+@WebMvcTest(value = EventServiceController.class, secure = false)
 @ImportAutoConfiguration(ControllerTestConfig.class)
 public class EventServiceControllerTest {
 

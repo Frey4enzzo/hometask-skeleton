@@ -13,7 +13,7 @@ spring:
 logging:
   level:
     ROOT: INFO
-    org.springframework: WARN
+    org.springframework: INFO
 
 ---
 spring:
